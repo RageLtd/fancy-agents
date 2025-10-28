@@ -1,0 +1,29 @@
+{
+  "agent": {
+    "build": {
+      "mode": "primary",
+      "model": "anthropic/claude-sonnet-4-5-20250929",
+      "description": "Implementation and execution agent for building features and writing code",
+      "prompt": ".opencode/prompts/build-agent.md",
+      "tools": [
+        "read",
+        "write",
+        "bash",
+        "search",
+        "diagnostics"
+      ]
+    },
+    "plan": {
+      "mode": "subagent",
+      "model": "opencode/gpt-5",
+      "description": "Planning and architectural design agent. Invoke for complex features requiring upfront design, multi-step coordination, or architectural decisions.",
+      "prompt": ".opencode/prompts/plan-agent.md",
+      "tools": [
+        "read",
+        "search",
+        "diagnostics"
+      ]
+    }
+  },
+  "small_model": "anthropic/claude-sonnet-4-20250514"
+}
