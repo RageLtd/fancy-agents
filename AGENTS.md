@@ -130,6 +130,36 @@ When a test fails, **question the test's validity BEFORE modifying working code*
 - Prefer early returns; flatten logic chains
 - Avoid nested if/else chains
 
+### Test-Driven Development (TDD)
+
+**For new features, write tests FIRST to capture requirements:**
+
+1. **Red**: Write failing tests that define expected behavior
+   - Tests serve as executable specifications
+   - Cover happy path, edge cases, and error conditions
+   - Get user approval on test cases before implementation
+
+2. **Green**: Write minimal code to make tests pass
+   - Focus only on passing the tests
+   - Don't add functionality beyond what tests require
+
+3. **Refactor**: Clean up while keeping tests green
+   - Improve code structure without changing behavior
+   - Tests protect against regressions
+
+**When to use TDD:**
+- New features with clear requirements
+- Bug fixes (write test that reproduces bug first)
+- API contracts and interfaces
+- Complex business logic
+
+**Test-first workflow:**
+1. Discuss requirements with user
+2. Write test cases capturing those requirements
+3. Present tests for approval before implementation
+4. Implement until tests pass
+5. Refactor if needed
+
 ## Tooling Rules
 
 1. **Always plan and obtain approval** before any tool use
