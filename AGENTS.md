@@ -38,28 +38,6 @@ Plan → Present → Approval → Execute → Update Todos
 - Re-plan when scope changes
 - Use read/exploration before destructive actions
 
-## Feature Development
-
-1. Task(architecture-advisor): Design approach
-2. Task(senior-engineer): Implementation
-3. Task(code-security-reviewer): Security review
-4. Task(test-automation-engineer): Test coverage
-5. Task(code-security-reviewer): Final validation
-
-## Bug Investigation
-
-1. Task(debugging-specialist): Root cause analysis
-2. Task(senior-engineer): Fix implementation
-3. Task(code-security-reviewer): Review fix
-4. Task(test-automation-engineer): Regression tests
-
-## Code Refactoring
-
-1. Task(architecture-advisor): Strategy
-2. Task(senior-engineer): Implementation
-3. Task(test-automation-engineer): Verify behavior preserved
-4. Task(code-security-reviewer): Quality assessment
-
 ---
 
 # QUALITY GATES
@@ -68,23 +46,6 @@ Plan → Present → Approval → Execute → Update Todos
 - **No features** without test coverage
 - **Test failures**: Question test validity BEFORE modifying working code
 - **Never** change functional code just to satisfy flawed tests
-
----
-
-# SUBAGENTS
-
-| Agent | Use For |
-|-------|---------|
-| `architecture-advisor` | System design, tech decisions, refactoring strategy |
-| `senior-engineer` | Feature implementation, following patterns |
-| `debugging-specialist` | Errors, performance issues, troubleshooting |
-| `test-automation-engineer` | Test creation, test reviews |
-| `code-security-reviewer` | Security analysis, code quality |
-| `general-purpose` | Complex searches, multi-step research |
-
-**Use proactively** - don't wait for explicit requests.
-**Run in parallel** when tasks are independent.
-**Synthesize results** - don't paste raw outputs.
 
 ---
 
