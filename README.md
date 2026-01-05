@@ -15,12 +15,8 @@ Comprehensive system prompt enforcing:
 
 ### .mcp.json
 Curated MCP server configuration:
-- **server-memory** - Persistent knowledge graph storage
 - **sequential-thinking** - Enhanced reasoning capabilities
-- **gitMCP** - GitHub repository documentation and code search
 - **context7** - Multi-source documentation lookup
-- **github** - GitHub Copilot MCP integration
-- **jira** - Atlassian Jira integration
 
 ## Usage
 
