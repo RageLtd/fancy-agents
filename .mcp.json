@@ -1,20 +1,8 @@
 {
 	"mcpServers": {
-		"server-memory": {
-			"type": "stdio",
-			"command": "bunx",
-			"args": ["@modelcontextprotocol/server-memory"],
-			"env": {
-				"MEMORY_FILE_PATH": "${PWD}/.claude/memory.json"
-			}
-		},
 		"sequential-thinking": {
 			"command": "bunx",
 			"args": ["@modelcontextprotocol/server-sequential-thinking"]
-		},
-		"gitMCP": {
-			"type": "http",
-			"url": "https://gitmcp.io/docs"
 		},
 		"context7": {
 			"type": "http",
@@ -25,21 +13,6 @@
 			"env": {
 				"CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
 			}
-		},
-		"github": {
-			"type": "http",
-			"url": "https://api.githubcopilot.com/mcp/",
-			"headers": {
-				"Authorization": "Bearer ${GITHUB_TOKEN}"
-			},
-			"env": {
-				"GITHUB_TOKEN": "${GITHUB_TOKEN}"
-			}
-		},
-		"jira": {
-			"type": "stdio",
-			"command": "bunx",
-			"args": ["mcp-remote", "https://mcp.atlassian.com/v1/sse"]
 		}
 	}
 }
