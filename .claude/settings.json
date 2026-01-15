@@ -1,64 +1,15 @@
 {
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Read|Edit|MultiEdit|Write|Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claudekit-hooks run file-guard"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [],
-    "Stop": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claudekit-hooks run typecheck-project"
-          },
-          {
-            "type": "command",
-            "command": "claudekit-hooks run lint-project"
-          },
-          {
-            "type": "command",
-            "command": "claudekit-hooks run test-project"
-          },
-          {
-            "type": "command",
-            "command": "claudekit-hooks run check-todos"
-          },
-          {
-            "type": "command",
-            "command": "claudekit-hooks run self-review"
-          },
-          {
-            "type": "command",
-            "command": "claudekit-hooks run create-checkpoint"
-          }
-        ]
-      }
-    ],
-    "SubagentStop": [],
-    "SessionStart": [],
-    "UserPromptSubmit": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claudekit-hooks run codebase-map"
-          },
-          {
-            "type": "command",
-            "command": "claudekit-hooks run thinking-level"
-          }
-        ]
-      }
-    ]
-  }
+	"enabledPlugins": {
+		"context7@claude-plugins-official": true,
+		"feature-dev@claude-plugins-official": true,
+		"code-review@claude-plugins-official": true,
+		"typescript-lsp@claude-plugins-official": true,
+		"security-guidance@claude-plugins-official": true,
+		"atlassian@claude-plugins-official": true,
+		"pr-review-toolkit@claude-plugins-official": true,
+		"Notion@claude-plugins-official": true,
+		"plugin-dev@claude-plugins-official": true,
+		"rust-analyzer-lsp@claude-plugins-official": true,
+		"code-simplifier@claude-plugins-official": true
+	}
 }
