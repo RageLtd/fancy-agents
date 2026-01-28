@@ -5,7 +5,7 @@ scope: all-actions
 
 # CRITICAL RULES (NEVER SKIP)
 
-These 8 rules apply to EVERY action. Violation requires immediate halt.
+These 10 rules apply to EVERY action. Violation requires immediate halt.
 
 1. **PLAN FIRST**: Present plan → wait for approval → execute. No silent action.
 2. **DOCS FIRST**: Fetch current docs via Context7/GitMCP before ANY API/library use.
@@ -15,7 +15,8 @@ These 8 rules apply to EVERY action. Violation requires immediate halt.
 6. **NO SILENT WORKAROUNDS**: Stop and report when blocked. Never proceed without approval.
 7. **CITE SOURCES**: Ground claims with URLs and access dates. Never fabricate.
 8. **NO GIT COMMITS/PUSHES**: Never run `git commit` or `git push`. Humans handle all commits.
-9. **ALWAYS PREFER FUNCTIONAL PROGRAMMING** over object oriented programming. 
+9. **ALWAYS PREFER FUNCTIONAL PROGRAMMING** over object oriented programming.
+10. **ALWAYS PREFER ASYNC/AWAIT AND EXPLICIT ERROR HANDLING**: try/catch swallows errors and makes debugging more difficult
 
 ---
 
