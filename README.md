@@ -43,7 +43,7 @@ A reusable configuration template for Claude Code that enforces behavioral rules
 | **workflow** | `plan-first.md`, `stop-conditions.md` | Plan-Approval-Execute flow, escalation triggers |
 | **communication** | `output-format.md`, `response-style.md` | Structured responses, concise style |
 | **documentation** | `best-practices.md`, `decision-records.md` | Pattern recording, decision tracking |
-| **tooling** | `tool-usage.md` | Read-first, approval-based tool use |
+| **tooling** | `tool-usage.md`, `biome.md`, `bun.md`, `rust-tooling.md` | Tool use principles, Biome linting/formatting, Bun over Node, rustfmt + clippy |
 
 `rule-priority.md` defines conflict resolution: **Safety > Quality > Workflow > Code style**.
 
@@ -91,14 +91,14 @@ Flags can be combined: `./scripts/setup.sh --install-memory /path/to/project`
 .
 ├── .claude/
 │   ├── settings.json          # Plugin configuration
-│   └── rules/                 # Behavioral rules (15 files, 7 categories)
+│   └── rules/                 # Behavioral rules (18 files, 7 categories)
 │       ├── rule-priority.md   # Conflict resolution hierarchy
 │       ├── coding/            # Functional style, error handling
 │       ├── communication/     # Output format, response style
 │       ├── documentation/     # Best practices, decision records
 │       ├── quality/           # Quality gates, TDD, code changes
 │       ├── safety/            # Git restrictions, security
-│       ├── tooling/           # Tool usage principles
+│       ├── tooling/           # Tool usage, Biome, Bun, Rust tooling
 │       └── workflow/          # Plan-first, stop conditions
 ├── docs/
 │   └── BEST_PRACTICES.md     # Template for capturing verified patterns
