@@ -1,7 +1,22 @@
 # Setup script for fancy-agents Claude Code environment (Windows)
-# Installs dependencies and configures the RageLtd/claude-mem marketplace
+# Installs dependencies, configures the RageLtd/claude-mem marketplace,
+# and installs Claude Code rules to the target project or globally.
+#
+# Usage: .\scripts\setup.ps1 [-InstallMemory] [project-path]
+#   -InstallMemory: install the RageLtd/claude-mem marketplace
+#   project-path:   optional path to a project directory
+#                   rules install to <project-path>\.claude\rules\
+#                   if omitted, rules install to ~\.claude\rules\ (global)
+
+param(
+    [switch]$InstallMemory,
+    [string]$TargetPath = ""
+)
 
 $ErrorActionPreference = "Stop"
+
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$RepoRoot = Split-Path -Parent $ScriptDir
 
 Write-Host "=== Fancy Agents - Claude Code Setup ===" -ForegroundColor Cyan
 Write-Host ""
@@ -149,6 +164,32 @@ function Add-ClaudeMemMarketplace {
     return $true
 }
 
+# Install Claude Code rules
+function Install-Rules {
+    $sourceRules = Join-Path $RepoRoot ".claude\rules"
+
+    if (-not (Test-Path $sourceRules)) {
+        Write-Err "Rules directory not found at $sourceRules"
+        return $false
+    }
+
+    if ($TargetPath -ne "") {
+        $dest = Join-Path $TargetPath ".claude\rules"
+        Write-Info "Installing rules to project: $dest"
+    } else {
+        $dest = Join-Path $env:USERPROFILE ".claude\rules"
+        Write-Info "Installing rules globally: $dest"
+    }
+
+    if (-not (Test-Path $dest)) {
+        New-Item -ItemType Directory -Path $dest -Force | Out-Null
+    }
+
+    Copy-Item -Path "$sourceRules\*" -Destination $dest -Recurse -Force
+    Write-Info "Rules installed successfully!"
+    return $true
+}
+
 # Main setup
 Write-Host ""
 Write-Info "Installing dependencies..."
@@ -162,7 +203,14 @@ Write-Host ""
 if (-not (Install-RustAnalyzer)) { $failures++ }
 Write-Host ""
 
-if (-not (Add-ClaudeMemMarketplace)) { $failures++ }
+if ($InstallMemory) {
+    if (-not (Add-ClaudeMemMarketplace)) { $failures++ }
+} else {
+    Write-Info "Skipping claude-mem marketplace (use -InstallMemory to include)"
+}
+Write-Host ""
+
+if (-not (Install-Rules)) { $failures++ }
 Write-Host ""
 
 # Summary

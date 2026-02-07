@@ -1,8 +1,27 @@
 #!/bin/bash
 # Setup script for fancy-agents Claude Code environment (macOS/Linux)
-# Installs dependencies and configures the RageLtd/claude-mem marketplace
+# Installs dependencies, configures the RageLtd/claude-mem marketplace,
+# and installs Claude Code rules to the target project or globally.
+#
+# Usage: ./scripts/setup.sh [--install-memory] [project-path]
+#   --install-memory: install the RageLtd/claude-mem marketplace
+#   project-path:     optional path to a project directory
+#                     rules install to <project-path>/.claude/rules/
+#                     if omitted, rules install to ~/.claude/rules/ (global)
 
 set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+INSTALL_MEMORY=false
+TARGET_PATH=""
+
+for arg in "$@"; do
+    case "$arg" in
+        --install-memory) INSTALL_MEMORY=true ;;
+        *) TARGET_PATH="$arg" ;;
+    esac
+done
 
 echo "=== Fancy Agents - Claude Code Setup ==="
 echo ""
@@ -155,6 +174,28 @@ EOF
     info "Marketplace configured successfully!"
 }
 
+# Install Claude Code rules
+install_rules() {
+    local source_rules="$REPO_ROOT/.claude/rules"
+
+    if [ ! -d "$source_rules" ]; then
+        error "Rules directory not found at $source_rules"
+        return 1
+    fi
+
+    if [ -n "$TARGET_PATH" ]; then
+        local dest="$TARGET_PATH/.claude/rules"
+        info "Installing rules to project: $dest"
+    else
+        local dest="$HOME/.claude/rules"
+        info "Installing rules globally: $dest"
+    fi
+
+    mkdir -p "$dest"
+    cp -R "$source_rules"/ "$dest"/
+    info "Rules installed successfully!"
+}
+
 # Main setup
 echo ""
 info "Installing dependencies..."
@@ -169,7 +210,15 @@ echo ""
 install_rust_analyzer || ((FAILURES++))
 echo ""
 
-add_claude_mem_marketplace || ((FAILURES++))
+if [ "$INSTALL_MEMORY" = true ]; then
+    add_claude_mem_marketplace || ((FAILURES++))
+    echo ""
+else
+    info "Skipping claude-mem marketplace (use --install-memory to include)"
+fi
+echo ""
+
+install_rules || ((FAILURES++))
 echo ""
 
 # Summary
